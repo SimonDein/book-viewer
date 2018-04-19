@@ -34,7 +34,6 @@ end
 
 get "/search" do
   @query = params['query']
-  @search_result = nil
   @search_result = chapters_matching(@query) if @query
 
   erb :search
@@ -70,6 +69,6 @@ helpers do
         result << {name: name, number: number, paragraphs: matches}
       end
     end
-    result
+    result.empty? ? nil : result
   end
 end
